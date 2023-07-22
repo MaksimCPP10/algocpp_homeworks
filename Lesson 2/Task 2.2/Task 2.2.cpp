@@ -1,8 +1,8 @@
 ﻿#include <iostream>
 
-long int Fib_dyn(int number)
+unsigned int Fib_dyn(unsigned int* arr, int number)
 {
-    long int *Fib = new long int[number + 1];
+    auto Fib = arr;
     Fib[0] = 0;
     Fib[1] = 1;
     for (int i = 2; i <= number; i++)
@@ -10,7 +10,7 @@ long int Fib_dyn(int number)
         Fib[i] = Fib[i - 1] + Fib[i - 2];
     }
     return Fib[number];
-    delete[] Fib;
+    
 }
 
 int main()
@@ -20,5 +20,7 @@ int main()
     int answer;
     std::cout << "\nВведите число: ";
     std::cin >> answer;
-    std::cout << "\nЧисло Фибоначчи числа " << answer << " равно " << Fib_dyn(answer) << ".\n";
+    unsigned int* Fib = new unsigned int[answer + 1];
+    std::cout << "\nЧисло Фибоначчи числа " << answer << " равно " << Fib_dyn(Fib, answer) << ".\n";
+    delete[] Fib;
 }
