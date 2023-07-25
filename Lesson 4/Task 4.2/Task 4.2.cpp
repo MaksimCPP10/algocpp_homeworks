@@ -1,5 +1,31 @@
 ﻿#include <iostream>
 
+int append_to_dynamic_array(int* arr, int& logical_size, int& actual_size, int value)
+{
+    if (logical_size < actual_size)
+    {
+        arr[logical_size] = value;
+        logical_size += 1;
+       
+        return *arr;
+    }
+    if (logical_size == actual_size)
+    {
+        actual_size *= 2;
+        int* new_arr = new int[actual_size];
+        for (int i = 0; i < logical_size; i++)
+        {
+            new_arr[i] = arr[i];
+        }
+        arr = new_arr;
+        arr[logical_size] = value;
+        delete[] new_arr;
+        logical_size += 1;
+        
+        return *arr;
+    }
+}
+
 void print_dynamic_array(int* arr, int logical_size, int actual_size)
 { 
     for (int i = 0; i < actual_size; i++)
@@ -19,7 +45,7 @@ void print_dynamic_array(int* arr, int logical_size, int actual_size)
 int main()
 {
     setlocale(0, "");
-    std::cout << "\n\t\tЗадача №1. Вывод изменяемого динамического массива.\n";
+    std::cout << "\n\t\tЗадача №2. Добавление в изменяемый динамический массив.\n";
 
     int logical_size, actual_size, value;
     do
@@ -42,7 +68,21 @@ int main()
         std::cin >> value;
         arr[i] = value;
     }
+
     std::cout << "\nДинамический массив: ";
+    print_dynamic_array(arr, logical_size, actual_size);
+
+    do
+    {
+        std::cout << "\nВведите элемент для добавления: (0 - для завершения) ";
+        std::cin >> value;
+        append_to_dynamic_array(arr, logical_size, actual_size, value);
+        std::cout << "\nДинамический массив: ";
+        print_dynamic_array(arr, logical_size, actual_size);
+
+    } while (value != 0);
+
+    std::cout << "\nСпасибо! Ваш массив: ";
     print_dynamic_array(arr, logical_size, actual_size);
 
     delete[] arr;
