@@ -9,21 +9,28 @@ int append_to_dynamic_array(int* arr, int& logical_size, int& actual_size, int v
        
         return *arr;
     }
-    if (logical_size == actual_size)
-    {
+    else if (logical_size == actual_size)
+    {        
         actual_size *= 2;
         int* new_arr = new int[actual_size];
+                
         for (int i = 0; i < logical_size; i++)
         {
             new_arr[i] = arr[i];
+            
         }
+        arr[logical_size] = value;//Если данное выражение поставить в это место, то программа отрабатывает как и ожидается, но после 
+        //нажатия "0" для завершения, программа записывает 0 последним элементом и "падает"...
         arr = new_arr;
-        arr[logical_size] = value;
         delete[] new_arr;
+
+        //arr[logical_size] = value; //Если данное выражение поставить в это место, то программа отрабатывает без "падения", но прис-
+        //ваивания элементу arr[logical_size] значения value не происходит.
         logical_size += 1;
         
-        return *arr;
+        return *arr;        
     }
+    return *arr;
 }
 
 void print_dynamic_array(int* arr, int logical_size, int actual_size)
