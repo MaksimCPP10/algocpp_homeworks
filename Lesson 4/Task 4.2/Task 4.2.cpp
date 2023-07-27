@@ -1,36 +1,30 @@
 ﻿#include <iostream>
 
-int append_to_dynamic_array(int* arr, int& logical_size, int& actual_size, int value)
+int* append_to_dynamic_array(int* arr, int& logical_size, int& actual_size, int value)
 {
     if (logical_size < actual_size)
     {
         arr[logical_size] = value;
-        logical_size += 1;
-       
-        return *arr;
     }
     else if (logical_size == actual_size)
     {        
         actual_size *= 2;
         int* new_arr = new int[actual_size];
-                
-        for (int i = 0; i < logical_size; i++)
-        {
-            new_arr[i] = arr[i];
-            
-        }
-        arr[logical_size] = value;//Если данное выражение поставить в это место, то программа отрабатывает как и ожидается, но после 
-        //нажатия "0" для завершения, программа записывает 0 последним элементом и "падает"...
-        arr = new_arr;
-        delete[] new_arr;
 
-        //arr[logical_size] = value; //Если данное выражение поставить в это место, то программа отрабатывает без "падения", но прис-
-        //ваивания элементу arr[logical_size] значения value не происходит.
-        logical_size += 1;
+        new_arr[logical_size] = value;
+                     
+        for (int i = 0; i < logical_size; ++i)
+        {
+            new_arr[i] = arr[i];           
+        } 
+  
+        delete[] arr;
+        arr = new_arr;
         
-        return *arr;        
     }
-    return *arr;
+    logical_size += 1;
+
+    return arr;
 }
 
 void print_dynamic_array(int* arr, int logical_size, int actual_size)
