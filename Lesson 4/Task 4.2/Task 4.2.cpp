@@ -17,6 +17,12 @@ int* append_to_dynamic_array(int* arr, int& logical_size, int& actual_size, int 
         {
             new_arr[i] = arr[i];           
         } 
+
+        /*new_arr[logical_size] = value; */
+
+        //Остался только один вопрос : почему при размещении данного выражения в этом месте кода, всё равно
+        //появляется предупреждение о переполнении буфера при записи в "new_arr"? Ведь new_arr имеет размер [actual_size] и
+        //new_arr[logical_size] не выходит за "границы" [actual_size].
   
         delete[] arr;
         arr = new_arr;
@@ -77,7 +83,7 @@ int main()
     {
         std::cout << "\nВведите элемент для добавления: (0 - для завершения) ";
         std::cin >> value;
-        append_to_dynamic_array(arr, logical_size, actual_size, value);
+        arr=append_to_dynamic_array(arr, logical_size, actual_size, value);
         std::cout << "\nДинамический массив: ";
         print_dynamic_array(arr, logical_size, actual_size);
 
