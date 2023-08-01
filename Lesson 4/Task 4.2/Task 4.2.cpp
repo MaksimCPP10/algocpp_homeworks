@@ -11,14 +11,14 @@ int* append_to_dynamic_array(int* arr, int& logical_size, int& actual_size, int 
         actual_size *= 2;
         int* new_arr = new int[actual_size];
 
-        new_arr[logical_size] = value;
+        /*new_arr[logical_size] = value;*/
                      
         for (int i = 0; i < logical_size; ++i)
         {
             new_arr[i] = arr[i];           
         } 
 
-        /*new_arr[logical_size] = value; */
+        new_arr[logical_size] = value;
 
         //Остался только один вопрос : почему при размещении данного выражения в этом месте кода, всё равно
         //появляется предупреждение о переполнении буфера при записи в "new_arr"? Ведь new_arr имеет размер [actual_size] и
