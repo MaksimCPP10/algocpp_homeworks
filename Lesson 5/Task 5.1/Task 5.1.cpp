@@ -12,32 +12,29 @@ void print_array(int* arr, int size)
 void print_pyramid(int* arr, int size)
 {   
 
-    int parent, left_child, right_child, level=0;
+    int parent, level;
     std::cout << "\nПирамида:\n";
 
     
 
-    for (int i = 0; i < size/2; i++)
+    for (int i = 0; i < size; i++)
     {
+        level = log(i + 1) / log(2);
+        parent = arr[(i - 1) / 2];
+
         if (i == 0)
         {
             std::cout << level << " root " << arr[0] << "\n";
-            level++;
         }
-        parent = arr[i];
-        left_child = arr[(i * 2) + 1];
-        std::cout << level << " left (" << parent << ") " << left_child << "\n";
 
-        
-        if ((i * 2 + 2) >= size) { continue; }
+        else if (i % 2 == 1)
+        {
+            std::cout << level << " left (" << parent << ") " << arr[i] << "\n";
+        }           
         else
         {
-            right_child = arr[(i * 2) + 2];
-            std::cout << level << " right (" << parent << ") " << right_child << "\n";
-        }
-                  
-        level++;
-        
+            std::cout << level << " right (" << parent << ") " << arr[i] << "\n";
+        }               
     }
 }
 
